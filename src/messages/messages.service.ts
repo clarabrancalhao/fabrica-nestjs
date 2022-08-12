@@ -1,15 +1,16 @@
 import { Injectable } from '@nestjs/common';
+import { Message } from './messages';
 
 @Injectable()
 export class MessagesService {
-  private messages = [
+  private messages: Message[] = [
     {
       id: 1,
-      message: 'Hello World!',
+      text: 'Hello World!',
     },
     {
       id: 2,
-      message: 'Hello World!',
+      text: 'Hello World!',
     },
   ];
 
@@ -19,5 +20,9 @@ export class MessagesService {
 
   findById(id: number) {
     return this.messages.find((message) => message.id === id);
+  }
+
+  create(message: { id: number; text: string }) {
+    return this.messages.push(message);
   }
 }
