@@ -8,6 +8,7 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
+import { MessageDto } from './MessageDto';
 import { Message } from './Messages';
 import { MessagesService } from './messages.service';
 
@@ -27,7 +28,7 @@ export class MessagesController {
   }
 
   @Post()
-  create(@Body() message: Message) {
+  create(@Body() message: MessageDto) {
     return this.messagesService.create(message);
   }
 
