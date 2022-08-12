@@ -9,7 +9,6 @@ import {
   Put,
 } from '@nestjs/common';
 import { MessageDto } from './MessageDto';
-import { Message } from './Messages';
 import { MessagesService } from './messages.service';
 
 @Controller('messages')
@@ -33,8 +32,12 @@ export class MessagesController {
   }
 
   @Put(':id')
-  update(@Param() params, @Body() message: Message) {
-    return this.messagesService.update(Number(params.id), message);
+  update(@Param() params, @Body() message: MessageDto) {
+    return this.messagesService
+      .update(Number(params.id), message)
+      .catch((e) => {
+        throw new NotFoundException(e.message);
+      });
   }
 
   @Delete(':id')
