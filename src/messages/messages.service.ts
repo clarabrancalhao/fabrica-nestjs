@@ -16,11 +16,11 @@ export class MessagesService {
   ];
 
   findAll() {
-    return this.messages;
+    return this.messages.filter(Boolean);
   }
 
   async findById(id: number) {
-    const message = this.messages.find((message) => message.id === id);
+    const message = this.messages.find((message) => message?.id === id);
 
     if (!message) {
       throw new Error('Message not found');
@@ -43,7 +43,7 @@ export class MessagesService {
   }
 
   async update(id: number, messageDto: MessageDto) {
-    const index = this.messages.findIndex((m) => m.id === id);
+    const index = this.messages.findIndex((m) => m?.id === id);
 
     if (index < 0) {
       throw new Error('Message not found');
@@ -58,7 +58,7 @@ export class MessagesService {
   }
 
   async delete(id: number) {
-    const index = this.messages.findIndex((m) => m.id === id);
+    const index = this.messages.findIndex((m) => m?.id === id);
 
     if (index < 0) {
       throw new Error('Message not found');
