@@ -17,15 +17,22 @@ export class PokemonService {
     return this.prisma.pokemon.findMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} pokemon`;
+  findOne(id: string) {
+    return this.prisma.pokemon.findUnique({
+      where: {
+        id,
+      },
+    });
   }
 
-  update(id: number, updatePokemonDto: UpdatePokemonDto) {
-    return `This action updates a #${id} pokemon`;
+  update(id: string, data: UpdatePokemonDto) {
+    return this.prisma.pokemon.update({
+      where: { id },
+      data,
+    });
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} pokemon`;
+  remove(id: string) {
+    return this.prisma.pokemon.delete({ where: { id } });
   }
 }
